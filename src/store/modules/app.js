@@ -5,11 +5,13 @@ const state = {
   items: [
     {
       title: "home",
-      to: '/'
+      to: '/',
+      icon: ''
     },
     {
       title: 'test',
-      to : '/test'
+      to : '/test',
+      icon: ''
     },
   ]
 }

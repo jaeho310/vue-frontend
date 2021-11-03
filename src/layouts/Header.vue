@@ -1,49 +1,71 @@
 <template>
-  <div>
-    <v-app-bar
-      dense
-      dark
+  <v-app>
+    <v-card
+      color="orange"
+      flat
     >
-
-    <v-menu
-        right
-        bottom
+      <v-app-bar
+        color="blue lighten-1"
+        dark
+        dense
       >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
+        <v-app-bar-nav-icon @click="drawer = !drawer" />
+        <v-toolbar-title>Platform Backoffice</v-toolbar-title>
+        <v-spacer />
+      </v-app-bar>
+    </v-card>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+      color="blue lighten-5"
+    >
+      <v-list-item>
+        <v-list-item-avatar>
+          <v-img src="https://t1.daumcdn.net/cfile/tistory/2459514E550A64DD27"></v-img>
+        </v-list-item-avatar>
 
-        <v-list>
-          <v-list-item
-            v-for="(n,idx) in items"
-            :key="idx"
-            :to="n.to"
-          >
-            <v-list-item-title> {{ n.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-app-bar>
+        <v-list-item-content>
+          <v-list-item-title>Platform Backoffice</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
+      <v-divider />
 
-  </div>
+      <v-list dense>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+          :to="item.to"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <router-view />
+  </v-app>
 </template>
 
 <script>
-  import { sync } from 'vuex-pathify'
-  export default {
-    methods: {
-    },
-    computed: {
-      items: sync('app/items'),
-    },
-  }
+import { sync } from 'vuex-pathify'
+export default {
+  name: "DefaultHeader",
+  data() {
+    return {
+      drawer: true,
+    }
+  },
+  computed: {
+    items: sync('app/items'),
+  },
+}
 </script>
 
 <style>
